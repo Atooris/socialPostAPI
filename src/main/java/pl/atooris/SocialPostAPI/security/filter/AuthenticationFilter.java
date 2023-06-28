@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import pl.atooris.SocialPostAPI.entity.User;
 import pl.atooris.SocialPostAPI.security.SecurityConstants;
 import pl.atooris.SocialPostAPI.security.manager.CustomAuthenticationManager;

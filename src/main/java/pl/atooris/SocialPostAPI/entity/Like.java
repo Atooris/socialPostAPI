@@ -1,15 +1,11 @@
 package pl.atooris.SocialPostAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -27,7 +23,6 @@ public class Like {
     @Column(name = "id")
     private Long id;
 
-//    @NotNull(message = "Creator cannot be null")
     @NonNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "author_id", referencedColumnName = "id")

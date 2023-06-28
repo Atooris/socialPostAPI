@@ -7,7 +7,6 @@ import pl.atooris.SocialPostAPI.dataTransferObject.UserUpdateRequest;
 import pl.atooris.SocialPostAPI.entity.User;
 import pl.atooris.SocialPostAPI.exception.EntityNotFoundException;
 import pl.atooris.SocialPostAPI.mail.EmailService;
-import pl.atooris.SocialPostAPI.mail.EmailServiceImpl;
 import pl.atooris.SocialPostAPI.repository.RoleRepository;
 import pl.atooris.SocialPostAPI.repository.UserRepository;
 import pl.atooris.SocialPostAPI.security.manager.JWTTokenManager;

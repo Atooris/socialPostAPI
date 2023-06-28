@@ -6,10 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.atooris.SocialPostAPI.dataTransferObject.UserUpdateRequest;
-import pl.atooris.SocialPostAPI.entity.Role;
 import pl.atooris.SocialPostAPI.entity.User;
-import pl.atooris.SocialPostAPI.security.SecurityConstants;
-import pl.atooris.SocialPostAPI.service.RoleService;
 import pl.atooris.SocialPostAPI.service.UserService;
 
 import java.util.ArrayList;

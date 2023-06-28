@@ -10,7 +10,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 import pl.atooris.SocialPostAPI.security.filter.AuthenticationFilter;
 import pl.atooris.SocialPostAPI.security.filter.ExceptionHandlerRequest;
 import pl.atooris.SocialPostAPI.security.filter.JWTAuthenticationFilter;
@@ -22,8 +21,6 @@ import pl.atooris.SocialPostAPI.service.UserServiceImpl;
 import static pl.atooris.SocialPostAPI.security.SecurityConstants.*;
 
 @Configuration
-//@EnableMethodSecurity
-//@EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
 

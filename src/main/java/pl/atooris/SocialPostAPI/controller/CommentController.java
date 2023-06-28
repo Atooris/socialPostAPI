@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.atooris.SocialPostAPI.entity.Comment;
 import pl.atooris.SocialPostAPI.service.CommentService;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @AllArgsConstructor

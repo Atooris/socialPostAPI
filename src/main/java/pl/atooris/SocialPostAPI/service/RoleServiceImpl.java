@@ -6,7 +6,6 @@ import pl.atooris.SocialPostAPI.entity.Role;
 import pl.atooris.SocialPostAPI.entity.User;
 import pl.atooris.SocialPostAPI.exception.EntityNotFoundException;
 import pl.atooris.SocialPostAPI.repository.RoleRepository;
-import pl.atooris.SocialPostAPI.repository.UserRepository;
 
 import java.util.Optional;
 

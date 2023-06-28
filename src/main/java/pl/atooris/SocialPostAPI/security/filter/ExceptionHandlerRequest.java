@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 
 public class ExceptionHandlerRequest extends OncePerRequestFilter {
