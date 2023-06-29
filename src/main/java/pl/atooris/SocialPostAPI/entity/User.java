@@ -84,7 +84,7 @@ public class User{
 
     @JsonIgnore
     @ManyToMany(mappedBy = "followers")
-    private Set<User> follows;
+    private Set<User> following;
 
     @JsonIgnore
     @OneToMany(mappedBy = "author")
@@ -111,6 +111,6 @@ public class User{
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "notification_id")
     )
-    Set<Notification> notifications;
+    Set<Notification> notifications = new HashSet<>();
 
 }

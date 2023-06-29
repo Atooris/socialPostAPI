@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.atooris.SocialPostAPI.entity.*;
 import pl.atooris.SocialPostAPI.repository.NotificationRepository;
 
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -22,8 +21,6 @@ public class NotificationServiceImpl implements NotificationService{
     @Override
     public Notification saveNotification(Object associatedObject, User sender) {
         Notification notification = new Notification();
-//        if(notification.getReceivers() == null) notification.setReceivers(new HashSet<>());
-        notification.setReceivers(new HashSet<>());
         notification.setSender(sender);
         if(associatedObject instanceof Post){
             sender.getFollowers().forEach(follow -> notification.getReceivers().add(follow));
