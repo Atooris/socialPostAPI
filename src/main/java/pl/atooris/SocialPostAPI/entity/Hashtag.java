@@ -1,20 +1,26 @@
 package pl.atooris.SocialPostAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
-@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "hashtag", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Hashtag {
+
+    public Hashtag(){
+        this.creationDate = LocalDateTime.now();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,4 +35,8 @@ public class Hashtag {
     @JsonIgnore
     @ManyToMany(mappedBy = "hashtags", cascade = CascadeType.ALL)
     private Set<Post> posts;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm:ss")
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 }

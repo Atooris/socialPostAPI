@@ -8,6 +8,7 @@ import lombok.*;
 import pl.atooris.SocialPostAPI.validation.Age;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,14 +16,22 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@NoArgsConstructor(force = true)
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User{
+
+    public User(){
+        this.creationDate = LocalDateTime.now();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
     @NotBlank(message = "First name cannot be blank")
     @NonNull
@@ -65,6 +74,19 @@ public class User{
     private List<Comment> comments;
 
     @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "user_follow",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follow_id")
+    )
+    private Set<User> followers;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "followers")
+    private Set<User> follows;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     private List<Like> like;
 
@@ -73,6 +95,7 @@ public class User{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -80,5 +103,14 @@ public class User{
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     Set<Role> roles = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToMany()
+    @JoinTable(
+            name = "user_notification",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id")
+    )
+    Set<Notification> notifications;
 
 }

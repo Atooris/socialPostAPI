@@ -91,6 +91,13 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
+    @Override
+    public void followUser(Long id, Long toFollowUserId) {
+        User toFollowUser = getUser(toFollowUserId);
+        toFollowUser.getFollowers().add(getUser(id));
+        userRepository.save(toFollowUser);
+    }
+
     static User unwrapUser(Optional<User> entity, Long id){
         if(entity.isPresent()) return entity.get();
         else throw new EntityNotFoundException(id, User.class);

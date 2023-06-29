@@ -14,4 +14,5 @@ public interface UserService {
     List<User> getAllUsers();
     void confirmUser(String token, Long id);
     User registerUser(User user);
+    void followUser(Long id, Long toFollowUserId);
 }

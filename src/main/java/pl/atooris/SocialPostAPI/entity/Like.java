@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "likes")
-public class Like {
+public class Like{
 
     public Like(){
-        this.creationTime = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now();
     }
 
     @Id
@@ -34,6 +34,6 @@ public class Like {
     private Post post;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm:ss")
-    @Column(name = "creation_time")
-    private LocalDateTime creationTime;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 }

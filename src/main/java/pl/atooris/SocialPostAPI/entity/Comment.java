@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "comment")
-public class Comment {
+public class Comment{
 
     public Comment(){
-        this.creationTime = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now();
     }
 
     @Id
@@ -33,9 +33,9 @@ public class Comment {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "creation_time")
+    @Column(name = "creation_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm")
-    private LocalDateTime creationTime;
+    private LocalDateTime creationDate;
 
     @JsonIncludeProperties("id")
     @ManyToOne(optional = false)

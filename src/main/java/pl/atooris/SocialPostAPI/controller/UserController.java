@@ -64,4 +64,10 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUser(userUpdateRequest, id), HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}/follow/{toFollowUserId}")
+    public ResponseEntity<HttpStatus> followUser(@PathVariable Long id, @PathVariable Long toFollowUserId){
+        userService.followUser(id, toFollowUserId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

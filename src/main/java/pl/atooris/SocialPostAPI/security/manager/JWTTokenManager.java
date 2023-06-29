@@ -10,11 +10,10 @@ import java.util.Date;
 @Component
 public class JWTTokenManager {
     public String createVerificationToken(String subject){
-        String token = JWT.create()
+        return JWT.create()
                 .withSubject(subject)
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(SecurityConstants.SECRET_KEY));
-        return token;
     }
 
     public void verifyToken(String token){

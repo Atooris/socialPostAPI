@@ -3,9 +3,8 @@ package pl.atooris.SocialPostAPI.service;
 import pl.atooris.SocialPostAPI.entity.Comment;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface CommentService {
+public interface CommentService{
     Comment getComment(Long id);
     Comment saveComment(Comment comment, Long postId, Long authorId);
     void deleteComment(Long id);

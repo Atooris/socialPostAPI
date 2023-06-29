@@ -15,7 +15,6 @@ import java.util.Set;
 @Table(name = "Role", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Role implements GrantedAuthority {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

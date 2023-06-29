@@ -18,6 +18,7 @@ public class PostServiceImpl implements PostService{
     UserRepository userRepository;
     HashtagService hashtagService;
     RoleRepository roleRepository;
+    NotificationService notificationService;
 
     @Override
     public Post getPost(Long id) {
@@ -33,6 +34,7 @@ public class PostServiceImpl implements PostService{
         post.setAuthor(unwrappedAuthor);
         postRepository.save(post);
         hashtagService.associateHashtagsAndPost(post);
+        notificationService.saveNotification(post, unwrappedAuthor);
         return post;
     }
 
