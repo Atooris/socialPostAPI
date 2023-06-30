@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LikeRepository extends CrudRepository<Like, Long> {
     @Transactional
-    void deleteByPostIdAndAuthorId(Long postId, Long userId);
+    void deleteLikeByPostIdAndAuthorId(Long postId, Long authorId);
     List<Like> findByAuthorId(Long userId);
     List<Like> findByPostId(Long postId);
     Like findByAuthorIdAndPostId(Long userId, Long postId);

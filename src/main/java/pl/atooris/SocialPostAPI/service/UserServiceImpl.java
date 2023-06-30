@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService{
     EmailService emailService;
     RoleRepository roleRepository;
     JWTTokenManager jwtTokenManager;
+    NotificationService notificationService;
 
     @Override
     public User getUser(Long id) {
@@ -95,6 +96,7 @@ public class UserServiceImpl implements UserService{
     public void followUser(Long id, Long toFollowUserId) {
         User toFollowUser = getUser(toFollowUserId);
         toFollowUser.getFollowers().add(getUser(id));
+        notificationService.createFollowNotification(getUser(id), toFollowUser);
         userRepository.save(toFollowUser);
     }
 

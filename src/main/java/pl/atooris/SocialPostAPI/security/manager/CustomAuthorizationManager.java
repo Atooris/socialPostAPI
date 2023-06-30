@@ -3,6 +3,7 @@ package pl.atooris.SocialPostAPI.security.manager;
 import lombok.AllArgsConstructor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authorization.AuthorityAuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
@@ -34,20 +35,20 @@ public class CustomAuthorizationManager implements AuthorizationManager<RequestA
 
         boolean isAdmin = authentication.get().getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals(SecurityConstants.ROLE_ADMIN));
+        boolean isStaff = authentication.get().getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(SecurityConstants.ROLE_STAFF));
 
         String requestEndpoint = object.getRequest().getRequestURI();
+        AntPathMatcher expectedEndpoint = new AntPathMatcher();
 
-        // Pobierz userId i postId z dynamicznych segmentów ścieżki URL
-        String[] pathSegments = requestEndpoint.split("/");
-        String userId = pathSegments[2];
-        String postId = pathSegments[4];
-        String expectedEndpoint = "/user/" + userId + "/post/" + postId;
-
-        if(requestEndpoint.equals(expectedEndpoint) && object.getRequest().getMethod().equals("DELETE")){
+        if(object.getRequest().getMethod().equals("DELETE") && expectedEndpoint.match("/user/*/post/*", requestEndpoint)){
+            String[] pathSegments = requestEndpoint.split("/");
+            String userId = pathSegments[2];
+            String postId = pathSegments[4];
             boolean isOwner = postService.isOwnerOfPost(Long.parseLong(postId), Long.parseLong(userId));
-            return isOwner || isAdmin
-                    ? new AuthorizationDecision(true) : new AuthorizationDecision(false);
+            return isOwner || isAdmin ? new AuthorizationDecision(true) : new AuthorizationDecision(false);
         }
-        return null;
+
+        return  isAdmin || isStaff ? new AuthorizationDecision(true) : new AuthorizationDecision(false);
     }
 }

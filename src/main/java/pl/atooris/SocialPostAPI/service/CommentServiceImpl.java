@@ -18,8 +18,9 @@ import java.util.Optional;
 public class CommentServiceImpl implements CommentService{
 
     CommentRepository commentRepository;
-    PostRepository postRepository;
-    UserRepository userRepository;
+    PostService postService;
+    UserService userService;
+    NotificationService notificationService;
 
     @Override
     public Comment getComment(Long id) {
@@ -29,10 +30,11 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public Comment saveComment(Comment comment, Long postId, Long authorId) {
-        Post post = postRepository.findById(postId).get();
-        User author = userRepository.findById(authorId).get();
+        Post post = postService.getPost(postId);
+        User author = userService.getUser(authorId);
         comment.setPost(post);
         comment.setAuthor(author);
+        notificationService.createCommentNotification(comment);
         return commentRepository.save(comment);
     }
 

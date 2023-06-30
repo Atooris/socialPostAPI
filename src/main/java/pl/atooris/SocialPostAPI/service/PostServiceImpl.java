@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService{
         post.setAuthor(unwrappedAuthor);
         postRepository.save(post);
         hashtagService.associateHashtagsAndPost(post);
-        notificationService.saveNotification(post, unwrappedAuthor);
+        notificationService.createPostNotification(post);
         return post;
     }
 

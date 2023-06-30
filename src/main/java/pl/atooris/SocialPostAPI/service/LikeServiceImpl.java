@@ -9,6 +9,7 @@ import pl.atooris.SocialPostAPI.repository.LikeRepository;
 import pl.atooris.SocialPostAPI.repository.PostRepository;
 import pl.atooris.SocialPostAPI.repository.UserRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,30 +18,38 @@ import java.util.Optional;
 public class LikeServiceImpl implements LikeService{
 
     LikeRepository likeRepository;
-    PostRepository postRepository;
-    UserRepository userRepository;
+    NotificationService notificationService;
+    PostService postService;
+    UserService userService;
 
     @Override
     public void addOrDeleteLikeFromPost(Like like, Long postId, Long userId) {
-        Optional<Post> post = postRepository.findById(postId);
-        Post unwrappedPost = PostServiceImpl.unwrapPost(post, postId);
-        Optional<User> user = userRepository.findById(userId);
-        User unwrappedUser = UserServiceImpl.unwrapUser(user, userId);
+        User user = userService.getUser(userId);
+        Post post = postService.getPost(postId);
 
-        like.setAuthor(unwrappedUser);
-        like.setPost(unwrappedPost);
+        like.setAuthor(user);
+        like.setPost(post);
 
-        if (isLikeExist(unwrappedPost, like)) {
+        if (isLikeExist(post, like)) {
             deleteLikeFromPost(postId, userId);
-        } else {
-            unwrappedPost.getLikes().add(like);
+        }
+        else {
+            post.getLikes().add(like);
+//            createLikeNotification(like);
             likeRepository.save(like);
         }
     }
 
+    private void createLikeNotification(Like like) {
+        if (like.getNotificationCooldown().isBefore(Instant.now())) {
+            notificationService.createLikeNotification(like);
+            like.setNotificationCooldown(Instant.now().plusSeconds(7200));  // 2 hours
+        }
+    }
+
     @Override
-    public void deleteLikeFromPost(Long postId, Long userId) {
-        likeRepository.deleteByPostIdAndAuthorId(postId, userId);
+    public void deleteLikeFromPost(Long postId, Long authorId) {
+        likeRepository.deleteLikeByPostIdAndAuthorId(postId, authorId);
     }
 
     @Override

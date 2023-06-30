@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public class Notification {
 
     public Notification(){
         this.creationDate = LocalDateTime.now();
+        this.receivers = new HashSet<>();
     }
 
     @Id

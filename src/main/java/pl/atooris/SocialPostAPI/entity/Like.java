@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Setter
@@ -36,4 +37,7 @@ public class Like{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yy HH:mm:ss")
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
+
+    @Column(name = "notification_cooldown")
+    Instant notificationCooldown = Instant.now();
 }

@@ -43,11 +43,11 @@ public class Post{
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post")
     private Set<Like> likes;
 
     @JsonIncludeProperties("name")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "post_hashtag",
             joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),

@@ -87,7 +87,7 @@ public class User{
     private Set<User> following;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Like> like;
 
     @Age(message = "Minimum age is 13")
@@ -105,7 +105,7 @@ public class User{
     Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_notification",
             joinColumns = @JoinColumn(name = "user_id"),
