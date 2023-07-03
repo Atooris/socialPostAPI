@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/user/*/confirm/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/user/*/role/*")).hasAuthority(ROLE_ADMIN)
+                .requestMatchers(new AntPathRequestMatcher("admin/user/*/role/*")).hasAuthority(ROLE_ADMIN)
                 .requestMatchers(HttpMethod.GET).hasAnyAuthority(ROLE_USER, ROLE_ADMIN, ROLE_GUEST)
                 .requestMatchers(HttpMethod.POST).hasAnyAuthority(ROLE_USER, ROLE_ADMIN)
                 .requestMatchers(HttpMethod.PATCH).hasAnyAuthority(ROLE_USER, ROLE_ADMIN)

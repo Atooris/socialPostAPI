@@ -14,7 +14,7 @@ public class RoleController {
 
     RoleService roleService;
 
-    @PatchMapping("/user/{userId}/role/{name}")
+    @PatchMapping("admin/user/{userId}/role/{name}")
     public ResponseEntity<HttpStatus> addRole(@PathVariable Long userId, @PathVariable String name){
         roleService.addRoleToUser(name, userId);
         return new ResponseEntity<>(HttpStatus.OK);

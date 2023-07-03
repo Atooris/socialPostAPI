@@ -43,6 +43,7 @@ public class SocialPostApiApplication implements CommandLineRunner {
 		Role[] roles = new Role[]{
 				new Role(SecurityConstants.ROLE_ADMIN),
 				new Role(SecurityConstants.ROLE_USER),
+				new Role(SecurityConstants.ROLE_STAFF),
 				new Role(SecurityConstants.ROLE_GUEST)
 		};
 
