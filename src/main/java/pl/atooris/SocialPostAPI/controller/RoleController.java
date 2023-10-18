@@ -19,4 +19,6 @@ public class RoleController {
         roleService.addRoleToUser(name, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }

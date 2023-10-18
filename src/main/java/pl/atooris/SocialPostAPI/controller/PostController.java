@@ -4,8 +4,10 @@ package pl.atooris.SocialPostAPI.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.atooris.SocialPostAPI.entity.Post;
 import pl.atooris.SocialPostAPI.service.PostService;
 
@@ -30,7 +32,6 @@ public class PostController {
 
     @DeleteMapping("/post/{id}")
     public ResponseEntity<HttpStatus> deletePost(@PathVariable Long id, @PathVariable Long userId){
-//        postService.hasAccessToResource(id, userId);
         postService.deletePost(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -44,7 +45,4 @@ public class PostController {
     public ResponseEntity<List<Post>> getUserPosts(@PathVariable Long userId){
         return new ResponseEntity<>(postService.getUserPosts(userId), HttpStatus.OK);
     }
-
-
-
 }

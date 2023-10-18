@@ -1,5 +1,9 @@
 package pl.atooris.SocialPostAPI;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +23,17 @@ import pl.atooris.SocialPostAPI.security.SecurityConstants;
 import java.time.LocalDate;
 
 @SpringBootApplication
+@OpenAPIDefinition(
+		info = @Info(
+				title = "SocialPost REST API Documentation",
+				description = "Documentation to better understand how to use SocialPost REST API",
+				version = "v1.1",
+				contact = @Contact(
+						name = "Łukasz Małysz",
+						email = "lukaszmalysz45@gmail.com"
+				)
+		)
+)
 @EnableJpaRepositories
 @EnableTransactionManagement
 @AllArgsConstructor
@@ -27,6 +42,7 @@ public class SocialPostApiApplication implements CommandLineRunner {
 	PostRepository postRepository;
 	UserRepository userRepository;
 	RoleRepository roleRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SocialPostApiApplication.class, args);

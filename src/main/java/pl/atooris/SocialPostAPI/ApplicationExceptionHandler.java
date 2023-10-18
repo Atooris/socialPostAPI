@@ -23,6 +23,12 @@ import java.util.List;
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGlobalException(Exception exception){
+        ErrorResponse errorResponse = new ErrorResponse(Arrays.asList(exception.getMessage()));
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(EntityNotFoundException exception){
         ErrorResponse errorResponse = new ErrorResponse(Arrays.asList(exception.getMessage()));

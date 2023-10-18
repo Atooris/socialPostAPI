@@ -41,6 +41,9 @@ public class Post{
     private String content;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Image> images;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "post")
