@@ -51,11 +51,13 @@ public class User{
     @Column(name = "username")
     private String username;
 
+    @NotBlank(message = "Password cannot be blank")
     @NonNull
     @Size(min = 5)
     @Column(name = "password")
     private String password;
 
+    @NotBlank(message = "Email cannot be blank")
     @Email(message = "Enter a valid email")
     @NonNull
     @Column(name = "email")
@@ -73,6 +75,7 @@ public class User{
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    //TODO improve, only list of followers is stored but not list of whom user is following
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -84,12 +87,13 @@ public class User{
 
     @JsonIgnore
     @ManyToMany(mappedBy = "followers")
-    private Set<User> following;
+    private Set<User> followed_by;
 
     @JsonIgnore
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Like> like;
 
+    @NotNull(message = "Date of birth cannot be blank")
     @Age(message = "Minimum age is 13")
     @NonNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")

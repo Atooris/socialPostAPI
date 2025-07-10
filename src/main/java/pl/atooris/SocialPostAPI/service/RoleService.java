@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface RoleService {
     Role getRole(String name);
     void addRoleToUser(String name, Long userId);
+    void deleteRoleFromUser(String name, Long userId);
 }

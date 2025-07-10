@@ -11,7 +11,10 @@ import java.util.concurrent.TimeUnit;
 public class AgeValidator implements ConstraintValidator<Age, LocalDate> {
     @Override
     public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
-        long age = localDate.until(LocalDate.now(), ChronoUnit.YEARS);
-        return age >= 13;
+        if(localDate != null){
+            long age = localDate.until(LocalDate.now(), ChronoUnit.YEARS);
+            return age >= 13;
+        }
+        return false;
     }
 }

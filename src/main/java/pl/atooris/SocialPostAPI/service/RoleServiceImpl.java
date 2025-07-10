@@ -7,7 +7,9 @@ import pl.atooris.SocialPostAPI.entity.User;
 import pl.atooris.SocialPostAPI.exception.EntityNotFoundException;
 import pl.atooris.SocialPostAPI.repository.RoleRepository;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -34,5 +36,16 @@ public class RoleServiceImpl implements RoleService{
         Role unwrappedRole = unwrapRole(role);
         user.getRoles().add(unwrappedRole);
 
+    }
+
+    @Override
+    public void deleteRoleFromUser(String name, Long userId) {
+        User user = userService.getUser(userId);
+        Set<Role> userRoles = user.getRoles();
+        Optional<Role> role = roleRepository.findByName(name);
+        Role unwrappedRole = unwrapRole(role);
+
+        if(userRoles.contains(unwrappedRole)) userRoles.remove(unwrappedRole);
+        else throw new EntityNotFoundException(404L, Role.class);
     }
 }
